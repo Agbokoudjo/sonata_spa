@@ -293,10 +293,10 @@ export class FormBindingManager implements BindingManagerInterface {
                 'container-div-error-message');
         });
 
-        form.addEventListener('field:validation:success', async (event) => {
+        form.addEventListener('field:validation:success',(event) => {
             const data = (event as CustomEvent).detail as FieldValidationEventData;
             controller.clearErrorDataChildren(data.targetChildrenForm);
-           // await this.checkFormValidityAndUpdateButton(form, controller);
+           this.updateSubmitButtonState(form,true);
         });
     }
 
@@ -314,7 +314,7 @@ export class FormBindingManager implements BindingManagerInterface {
         form.addEventListener('submit', async (e: SubmitEvent) => {
             e.preventDefault();
 
-            /*const controller = this.formControllers.get(form);
+            const controller = this.formControllers.get(form);
 
             // Run final validation if form_validator is initialized
             if (controller) {
@@ -323,7 +323,7 @@ export class FormBindingManager implements BindingManagerInterface {
                     this.updateSubmitButtonState(form, false);
                     return;
                 }
-            }*/
+            }
 
             // Get the clicked submit button
             // Priority: SubmitEvent.submitter → tracked dataset → first submit button
@@ -352,28 +352,33 @@ export class FormBindingManager implements BindingManagerInterface {
         });
     }
 
-    /**
-     * Enable or disable the submit button on a form.
+     /**
+     * Enable or disable all submit buttons on a form.
      *
-     * @param form - The form element
-     * @param enabled - true to enable, false to disable
+     * Manages both the native `disabled` attribute and the Bootstrap `.disabled`
+     * class to ensure consistent visual and functional state across browsers.
+     *
+     * Uses querySelectorAll scoped to the form — safe because submit buttons
+     * are never shared across forms.
+     *
+     * @param form    - The form element whose submit buttons to update
+     * @param enabled - true to enable all submit buttons, false to disable them
      */
     private updateSubmitButtonState(form: HTMLFormElement, enabled: boolean): void {
-        form.querySelectorAll<HTMLButtonElement>('button[type="submit"]').forEach((btn) => {
-            btn.disabled = !enabled;
-
-            if (enabled) {
-                btn.classList.remove('disabled');
-            } else {
-                btn.classList.add('disabled');
-            }
-        });
+        form.querySelectorAll<HTMLButtonElement>('button[type="submit"]')
+            .forEach((btn) => {
+                btn.disabled = !enabled;
+                btn.classList.toggle('disabled', !enabled);
+                // Bootstrap 5 also reads aria-disabled for accessibility
+                btn.setAttribute('aria-disabled', String(!enabled));
+            });
     }
 
     /**
      * Check overall form validity and update submit button state accordingly.
+     * Always checks ALL fields — not just the one that just changed.
      *
-     * @param form - The form element
+     * @param form       - The form element
      * @param controller - The FormValidateController instance
      */
     private async checkFormValidityAndUpdateButton(
