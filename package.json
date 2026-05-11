@@ -1,0 +1,144 @@
+{
+  "name": "@wlindabla/sonata_spa",
+  "packageManager": "yarn@4.12.0",
+  "author": {
+    "name": "AGBOKOUDJO Franck",
+    "email": "internationaleswebservices@gmail.com",
+    "company": "INTERNATIONALES WEB APPS & SERVICES"
+  },
+  "version": "1.0.0",
+  "description": "A Symfony-inspired Single Page Application (SPA) router designed specifically for SonataAdmin backends built with AdminLTE 4 and Bootstrap 5.3. Inspired by Symfony's HttpKernel and EventDispatcher architecture, it provides a full event-driven navigation pipeline that intercepts link clicks and form submissions, fetches pages via the Fetch API, and performs surgical DOM swaps without full page reloads — delivering a fast, seamless admin experience while preserving all native SonataAdmin features including Stimulus controllers, filters, pagination, batch actions, and CSRF protection. The kernel orchestrates navigation through a priority-based event system (SpaRequestEvent, SpaCrudEvent, SpaNavigateCompletedEvent, and more), allowing developers to hook into every stage of the lifecycle without modifying core code. Built-in subscribers handle list pages, show pages, delete confirmations with SweetAlert2, batch operations, and form submissions with smart redirect resolution inspired by Symfony's CRUDController::redirectTo(). The extension system, modeled after Sonata's AdminExtension pattern, lets developers add custom route patterns, binding managers, subscribers, and server-managed URL rules through a sealed SpaExtensionContext — without inheriting from the kernel. Fully written in TypeScript with strict typing, zero DOM framework dependencies, and designed to integrate seamlessly with @wlindabla/event_dispatcher, @wlindabla/http_client, and @wlindabla/form_validator.",
+  "keywords": [
+    "sonata-admin",
+    "sonataadmin",
+    "sonata",
+    "symfony",
+    "spa",
+    "single-page-application",
+    "admin",
+    "adminlte",
+    "adminlte4",
+    "bootstrap",
+    "bootstrap5",
+    "router",
+    "spa-router",
+    "symfony-inspired",
+    "httpkernel",
+    "event-dispatcher",
+    "event-driven",
+    "typescript",
+    "dom-swap",
+    "navigation",
+    "ajax-navigation",
+    "fetch-api",
+    "stimulus",
+    "hotwired",
+    "csrf",
+    "crud",
+    "sonata-crud",
+    "admin-panel",
+    "admin-backend",
+    "back-office",
+    "symfony-admin",
+    "symfony-backend",
+    "sonata-bundle",
+    "pagination",
+    "batch-actions",
+    "filter",
+    "form-submission",
+    "sweetalert2",
+    "kernel",
+    "subscriber",
+    "event-system",
+    "php-symfony",
+    "frontend",
+    "dom",
+    "no-full-reload",
+    "partial-update",
+    "wlindabla",
+    "INTERNATIONALES WEB APPS & SERVICES"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./events": {
+      "types": "./dist/esm/events.d.ts",
+      "import": "./dist/esm/events.js",
+      "require": "./dist/cjs/events.js"
+    },
+    "./subscribers": {
+      "types": "./dist/esm/subscribers.d.ts",
+      "import": "./dist/esm/subscribers.js",
+      "require": "./dist/cjs/subscribers.js"
+    },
+    "./contracts": {
+      "types": "./dist/esm/contracts.d.ts",
+      "import": "./dist/esm/contracts.js",
+      "require": "./dist/cjs/contracts.js"
+    },
+    "./http": {
+      "types": "./dist/esm/http.d.ts",
+      "import": "./dist/esm/http.js",
+      "require": "./dist/cjs/http.js"
+    },
+    "./exceptions": {
+      "types": "./dist/esm/exceptions.d.ts",
+      "import": "./dist/esm/exceptions.js",
+      "require": "./dist/cjs/exceptions.js"
+    },
+    "./extension": {
+      "types": "./dist/esm/extension.d.ts",
+      "import": "./dist/esm/extension.js",
+      "require": "./dist/cjs/extension.js"
+    },
+    "./swapper": {
+      "types": "./dist/esm/swapper.d.ts",
+      "import": "./dist/esm/swapper.js",
+      "require": "./dist/cjs/swapper.js"
+    },
+    "./logger": {
+      "types": "./dist/esm/logger.d.ts",
+      "import": "./dist/esm/logger.js",
+      "require": "./dist/cjs/logger.js"
+    },
+    "./types": {
+      "types": "./dist/esm/types.d.ts",
+      "import": "./dist/esm/types.js",
+      "require": "./dist/cjs/types.js"
+    }
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "docs"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.11"
+  },
+  "dependencies": {
+    "@wlindabla/form_validator": "^4.2.1"
+  },
+  "sideEffects": false
+}
