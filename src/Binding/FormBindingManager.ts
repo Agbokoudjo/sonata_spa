@@ -317,13 +317,13 @@ export class FormBindingManager implements BindingManagerInterface {
             const controller = this.formControllers.get(form);
 
             // Run final validation if form_validator is initialized
-            if (controller) {
-                const isValid = await controller.isFormValid(); problem of bug 
+           /* if (controller) {
+                const isValid = await controller.isFormValid(); //problem of bug 
                 if (!isValid) {
                     this.updateSubmitButtonState(form, false);
                     return;
                 }
-            }
+            }*/
 
             // Get the clicked submit button
             // Priority: SubmitEvent.submitter → tracked dataset → first submit button

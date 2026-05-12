@@ -6,7 +6,7 @@
     "email": "internationaleswebservices@gmail.com",
     "company": "INTERNATIONALES WEB APPS & SERVICES"
   },
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A Symfony-inspired Single Page Application (SPA) router designed specifically for SonataAdmin backends built with AdminLTE 4 and Bootstrap 5.3. Inspired by Symfony's HttpKernel and EventDispatcher architecture, it provides a full event-driven navigation pipeline that intercepts link clicks and form submissions, fetches pages via the Fetch API, and performs surgical DOM swaps without full page reloads — delivering a fast, seamless admin experience while preserving all native SonataAdmin features including Stimulus controllers, filters, pagination, batch actions, and CSRF protection. The kernel orchestrates navigation through a priority-based event system (SpaRequestEvent, SpaCrudEvent, SpaNavigateCompletedEvent, and more), allowing developers to hook into every stage of the lifecycle without modifying core code. Built-in subscribers handle list pages, show pages, delete confirmations with SweetAlert2, batch operations, and form submissions with smart redirect resolution inspired by Symfony's CRUDController::redirectTo(). The extension system, modeled after Sonata's AdminExtension pattern, lets developers add custom route patterns, binding managers, subscribers, and server-managed URL rules through a sealed SpaExtensionContext — without inheriting from the kernel. Fully written in TypeScript with strict typing, zero DOM framework dependencies, and designed to integrate seamlessly with @wlindabla/event_dispatcher, @wlindabla/http_client, and @wlindabla/form_validator.",
   "keywords": [
     "sonata-admin",
