@@ -728,9 +728,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wlindabla/form_validator@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "@wlindabla/form_validator@npm:4.2.4"
+"@wlindabla/form_validator@npm:^4.2.8":
+  version: 4.2.8
+  resolution: "@wlindabla/form_validator@npm:4.2.8"
   dependencies:
     "@wlindabla/event_dispatcher": "npm:^1.2.2"
     "@wlindabla/http_client": "npm:^1.2.2"
@@ -740,7 +740,7 @@ __metadata:
     pdfjs-dist: "npm:^5.7.284"
     sweetalert2: "npm:^11.26.24"
     xlsx: "npm:^0.18.5"
-  checksum: 10c0/14be5f98648abac5cd710bb6d1f0dcfd76b26b6d26cb6d6ef550518f03d3d19188ba1326027a9464925ed6451e046e6f3af5022866921bc4820cd2e03d7709a0
+  checksum: 10c0/fb1caf51edfcd774bbb322a3cf7dc830abec137f5f08213f1367be6dc8f8701f3c50cb50b673560d42f9d57f7ad1639952133b85780aaffa3ef21a4eeadb4f9d
   languageName: node
   linkType: hard
 
@@ -758,7 +758,7 @@ __metadata:
   resolution: "@wlindabla/sonata_spa@workspace:."
   dependencies:
     "@types/node": "npm:^25.7.0"
-    "@wlindabla/form_validator": "npm:^4.2.4"
+    "@wlindabla/form_validator": "npm:^4.2.8"
     tsup: "npm:^8.5.1"
     typescript: "npm:^6.0.3"
     vite: "npm:^8.0.12"
