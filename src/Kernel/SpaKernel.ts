@@ -241,7 +241,7 @@ export class SpaKernel implements SpaRouterInterface {
      *     },
      *   },
      *   'dev',
-     *   BrowserEventDispatcher(window, { bubbles: true })
+     *   new BrowserEventDispatcher(window, { bubbles: true })
      * );
      *
      * spa
@@ -367,6 +367,7 @@ export class SpaKernel implements SpaRouterInterface {
                 if (this.mainContentHeader) {
                     this.domManager.reinitialize(this.mainContentHeader, routeMatch);
                 }
+                
                 this.domManager.reinitialize(this.mainContentArea, routeMatch);
                  if (this.env !== 'prod') {
                      SonataSpaLogger.log('event SpaNavigateCompletedEvent', event);
@@ -405,7 +406,7 @@ export class SpaKernel implements SpaRouterInterface {
     public async handle(request: SpaRequest): Promise<void> {
         // Guard: prevent concurrent navigation
         if (this.isNavigating) {
-            if (this.env === "dev") {
+            if (this.env !== "prod") {
                 console.warn('[SpaKernel] Navigation already in progress — ignored.', request.url);
             }
             return;
@@ -440,7 +441,7 @@ export class SpaKernel implements SpaRouterInterface {
 
             if (routeResolvedEvent.isPropagationStopped()) {
                 // Developer takes full control of this navigation
-                if (this.env === 'dev') {
+                if (this.env !== 'prod') {
                     SonataSpaLogger.info('[SpaKernel] Navigation taken over by SpaRouteResolvedEvent listener.', routeMatch);
                 }
                 return;
@@ -556,7 +557,7 @@ export class SpaKernel implements SpaRouterInterface {
 
         const eventName = this.getCrudEventName(routeMatch);
 
-        if (this.env === "dev") {
+        if (this.env !== "prod") {
             SonataSpaLogger.info(`[SpaKernel] Dispatching ${eventName}`, routeMatch);
         }
 
@@ -617,7 +618,6 @@ export class SpaKernel implements SpaRouterInterface {
         manager.bind();
     }
 
-    // ─── DOM resolution ───────────────────────────────────────────────────────
     /**
      * Resolve all required DOM element references from selectors.
      * Called at the start of boot().
@@ -842,11 +842,10 @@ export class SpaKernel implements SpaRouterInterface {
      */
     public addKernelExtension(...extensions: SpaKernelExtensionInterface[]): this {
         if (this.booted) {
-            SonataSpaLogger.warn(
+            throw new Error(
                 '[SpaKernel] addKernelExtension() called after boot() — ignored. ' +
                 'Register extensions before calling boot().'
             );
-            return this;
         }
         this.kernelExtensions.push(...extensions);
         return this;

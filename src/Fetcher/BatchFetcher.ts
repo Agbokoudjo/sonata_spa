@@ -12,7 +12,7 @@ import type { FetchResponseInterface } from '@wlindabla/http_client/contracts';
 import { FetchDelegateAdapter } from './FetchDelegateAdapter';
 import type { BatchConfirmData, SpaRequest, RouteMatch } from '../types';
 import { SonataSpaLogger } from '../Logger';
-import { addParamToUrl } from '@wlindabla/form_validator';
+import { addParamToUrl } from '@wlindabla/form_validator/utils';
 
 /**
  * Handles the two-step Sonata batch flow:

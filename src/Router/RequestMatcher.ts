@@ -65,6 +65,7 @@ export class RequestMatcher implements RequestMatcherInterface {
             );
             return RequestMatcher._instance;
         }
+        
         RequestMatcher._instance = new RequestMatcher(serverManagedPatterns);
         return RequestMatcher._instance;
     }

@@ -13,9 +13,6 @@ import type {
      SwapContext,
      BatchConfirmData, 
     CRUDPageType } from '../types';
-
-// ─── SpaEvents — Event name constants ────────────────────────────────────────
-
 /**
  * All event name constants for @wlindabla/sonata_spa.
  * Single source of truth — use these constants everywhere instead of raw strings.
@@ -751,9 +748,6 @@ export class SpaDeleteFailedEvent extends BaseEvent {
         return this._statusText;
     }
 }
-
-
-// ─── Batch event classes ──────────────────────────────────────────────────────
 
 /**
  * Dispatched when the batch confirmation modal should be shown.

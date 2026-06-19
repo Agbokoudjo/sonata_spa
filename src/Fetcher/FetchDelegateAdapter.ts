@@ -5,7 +5,11 @@
  * @author AGBOKOUDJO Franck <internationaleswebservices@gmail.com>
  */
 
-import type { FetchDelegateInterface, FetchResponseInterface } from '@wlindabla/http_client/contracts';
+import type {
+    FetchDelegateInterface,
+    FetchRequestInterface,
+    FetchResponseInterface
+} from '@wlindabla/http_client/contracts';
 import { HttpFetchError } from '@wlindabla/http_client/core';
 import type { BrowserEventDispatcher } from '@wlindabla/event_dispatcher/browser';
 import { SpaEvents, SpaFetchErrorEvent } from '../Events';
@@ -71,14 +75,12 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
         this.loadingTargets = targets.filter(Boolean);
     }
 
-    // ─── FetchDelegateInterface implementation ────────────────────────────────
-
     /**
      * Called just before the HTTP request is sent.
      * Dispatches spa:fetch:prepare.
      * Use this to add custom headers dynamically.
      */
-    public prepareRequest(request: Request): void {
+    public prepareRequest(request: FetchRequestInterface): void {
         this.dispatcher.dispatch(
             { request, spaRequest: this.spaRequest },
             SpaEvents.FETCH_PREPARE
@@ -89,7 +91,7 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
      * Called when the HTTP request starts.
      * Dispatches spa:fetch:started and shows loading state.
      */
-    public requestStarted(request: Request): void {
+    public requestStarted(request: FetchRequestInterface): void {
         this.setLoading(true);
 
         this.dispatcher.dispatch(
@@ -103,7 +105,7 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
      * Dispatches spa:fetch:succeeded.
      */
     public requestSucceededWithResponse(
-        request: Request,
+        request: FetchRequestInterface,
         fetchResponse: FetchResponseInterface<unknown>
     ): void {
         this.dispatcher.dispatch(
@@ -117,7 +119,7 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
      * Dispatches spa:fetch:failed.
      */
     public requestFailedWithResponse(
-        request: Request,
+        request: FetchRequestInterface,
         fetchResponse: FetchResponseInterface<unknown>
     ): void {
         this.dispatcher.dispatch(
@@ -131,7 +133,7 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
      * Dispatches spa:fetch:errored and SpaFetchErrorEvent.
      * Falls back to window.location.href for resilience.
      */
-    public requestErrored(request: Request, error: Error): void {
+    public requestErrored(request: FetchRequestInterface, error: Error): void {
         if (this.spaRequest) {
             const errorEvent = new SpaFetchErrorEvent(this.spaRequest, error);
             this.dispatcher.dispatch(errorEvent, SpaEvents.FETCH_ERRORED);
@@ -146,7 +148,7 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
         SonataSpaLogger.error('[HttpFetchError]',error)
         // Network error or timeout — fall back to full server navigation
         if (SpaParameterBag.getEnv() === "prod") {
-            window.location.href = request.url;
+            window.location.href = request.url.toString();
         }
     }
 
@@ -154,7 +156,7 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
      * Called when the HTTP request finishes — always, success or error.
      * Dispatches spa:fetch:finished and hides loading state.
      */
-    public requestFinished(request: Request): void {
+    public requestFinished(request: FetchRequestInterface): void {
         this.setLoading(false);
 
         this.dispatcher.dispatch(
@@ -165,8 +167,6 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
         // Reset context after each request
         this.spaRequest = null;
     }
-
-    // ─── Loading state ────────────────────────────────────────────────────────
 
     /**
      * Apply or remove loading styles on the registered loading targets.
@@ -182,7 +182,7 @@ export class FetchDelegateAdapter implements FetchDelegateInterface {
         }
     }
 
-    public requestPreventedHandlingResponse(request: Request, fetchResponse: FetchResponseInterface<any>): void {
+    public requestPreventedHandlingResponse(request: FetchRequestInterface, fetchResponse: FetchResponseInterface<any>): void {
         console.log(request, fetchResponse);
     }
 }

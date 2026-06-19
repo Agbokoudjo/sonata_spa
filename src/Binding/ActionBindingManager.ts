@@ -127,8 +127,8 @@ export class ActionBindingManager implements BindingManagerInterface {
 
         // Check if this link should be ignored
         if (this.requestMatcher.shouldIgnoreLink(link)) {
-            // Si c'est un lien "#", on empêche le comportement par défaut 
-            // pour laisser Stimulus travailler tranquillement
+            // If it's a "#" link, we prevent the default behavior
+            // to let Stimulus work undisturbed
             if (href === '#' || href.startsWith('#') ||
                 href.startsWith('#') || href.indexOf('#') !== -1) {
                 e.preventDefault();

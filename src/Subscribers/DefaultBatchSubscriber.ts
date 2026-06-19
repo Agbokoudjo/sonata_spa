@@ -66,8 +66,6 @@ export class DefaultBatchSubscriber implements SpaSubscriberInterface {
         };
     }
 
-    // ─── Confirmation ─────────────────────────────────────────────────────────
-
     /**
      * Show a SweetAlert2 confirmation modal when a batch action is requested.
      *

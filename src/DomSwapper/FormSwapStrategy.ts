@@ -63,8 +63,6 @@ export class FormSwapStrategy implements SwapStrategyInterface {
         this.swapSonataActions(virtualDoc, context.mainContentHeader);
     }
 
-    // ─── Form container ───────────────────────────────────────────────────────
-
     /**
      * Swap the main form container .sonata-ba-form.
      * This is the primary target — contains the Symfony form with all fields.

@@ -14,7 +14,11 @@ import type { EventDispatcherInterface } from '@wlindabla/event_dispatcher';
 
 import { SpaEvents,SpaResponseEvent, SpaNavigateCompletedEvent } from '../Events';
 
-import { DomSwapManagerInterface, HistoryManagerInterface, PageFetcherInterface } from '../contracts';
+import type {
+    DomSwapManagerInterface, 
+    HistoryManagerInterface,
+    PageFetcherInterface
+} from '../contracts';
 
 /**
  * @author AGBOKOUDJO Franck <internationaleswebservices@gmail.com>

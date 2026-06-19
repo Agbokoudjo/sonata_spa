@@ -107,7 +107,6 @@ export class FormSubscriber extends AbstractFormSubmissionSubscriber implements 
         const formMethod = (form.getAttribute('method') ?? 'POST').toUpperCase();
 
         try {
-            // ── Build FormSubmission ──────────────────────────────────────────
             const submission = new FormSubmission(
                 form,
                 {
@@ -221,8 +220,6 @@ export class FormSubscriber extends AbstractFormSubmissionSubscriber implements 
             SpaEvents.FORM_FAILED
         );
     }
-
-    // ─── Redirect resolution ──────────────────────────────────────────────────
 
     /**
      * Resolve the redirect URL after a successful form submission.

@@ -30,8 +30,6 @@ import {
     SpaRouterInterface,
 } from '../contracts';
 
-// ─── SpaExtensionContext ──────────────────────────────────────────────────────
-
 /**
  * Limited view of SpaKernel exposed to extensions.
  *
@@ -121,8 +119,6 @@ export class SpaExtensionContext implements SpaExtensionContextInterface{
     public async navigate(url: string): Promise<void> {
         await this._router.navigate(url);
     }
-
-    // ── Route resolution ──────────────────────────────────────────────────────
 
     /**
      * Returns the RouteResolver instance.

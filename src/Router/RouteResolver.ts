@@ -75,6 +75,7 @@ export class RouteResolver implements RouteResolverInterface {
             );
             return RouteResolver._instance;
         }
+        
         RouteResolver._instance = new RouteResolver();
         return RouteResolver._instance;
     }
