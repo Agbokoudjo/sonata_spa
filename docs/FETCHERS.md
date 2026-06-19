@@ -168,4 +168,4 @@ The bridge between `@wlindabla/http_client`'s `FetchDelegateInterface` and the S
 
 On a **network-level error** (`requestErrored`), the adapter falls back to `window.location.href` in `'prod'` environment only. In `'dev'`, the error is logged and navigation stops, allowing you to inspect it in the console.
 
-All events carry both the native `Request` object and the original `SpaRequest` that triggered the fetch, so you have full context in your listeners.
+All events carry both the native `FetchRequestInterface` object and the original `SpaRequest` that triggered the fetch, so you have full context in your listeners.
