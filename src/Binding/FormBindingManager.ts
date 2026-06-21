@@ -79,6 +79,7 @@ export class FormBindingManager implements BindingManagerInterface {
             SonataSpaLogger.warn('[FormBindingManager] Instance already exists — returning existing.');
             return FormBindingManager._instance;
         }
+        
         FormBindingManager._instance = new FormBindingManager(dispatcher, mainContentArea, routeResolver);
         return FormBindingManager._instance;
     }
@@ -189,16 +190,16 @@ export class FormBindingManager implements BindingManagerInterface {
         controller: FormValidateController
     ): void {
         // Build CSS selector strings from the controller's ID lists
-        const selectorBlur = this.buildSelector(controller.idChildrenUsingEventBlur);
-        const selectorInput = this.buildSelector(controller.idChildrenUsingEventInput);
-        const selectorChange = this.buildSelector(controller.idChildrenUsingEventChange);
-        const selectorDragenter = this.buildSelector(controller.idChildrenUsingEventDragenter);
-        const selectorDrop = this.buildSelector(controller.idChildrenUsingEventDrop);
-        const selectorDragleave = this.buildSelector(controller.idChildrenUsingEventDragleave);
+        const selectorBlur = controller.idChildrenUsingEventBlur;
+        const selectorInput = controller.idChildrenUsingEventInput;
+        const selectorChange = controller.idChildrenUsingEventChange;
+        const selectorDragenter =controller.idChildrenUsingEventDragenter;
+        const selectorDrop = controller.idChildrenUsingEventDrop;
+        const selectorDragleave = controller.idChildrenUsingEventDragleave;
         // Blur validation — validate on field blur
         form.addEventListener('blur', async (e: FocusEvent) => {
             const target = e.target as HTMLElement;
-            if (!target.matches(selectorBlur)) return;
+            if (!selectorBlur.includes(target.id)) return;
 
             if (
                 (target instanceof HTMLInputElement ||
@@ -221,7 +222,7 @@ export class FormBindingManager implements BindingManagerInterface {
         // Input — clear errors on input
         form.addEventListener('input', (e: Event) => {
             const target = e.target as HTMLElement;
-            if (!target.matches(selectorInput)) return;
+            if (!selectorInput.includes(target.id)) return;
 
             if (
                 (target instanceof HTMLInputElement ||
@@ -235,7 +236,7 @@ export class FormBindingManager implements BindingManagerInterface {
         // Change — validate file inputs and selects
         form.addEventListener('change', async (e: Event) => {
             const target = e.target as HTMLElement;
-            if (!target.matches(selectorChange)) return;
+            if (!selectorChange.includes(target.id)) return;
 
             if (
                 target instanceof HTMLInputElement &&
@@ -248,7 +249,7 @@ export class FormBindingManager implements BindingManagerInterface {
         // Dragenter — clear errors on file drag
         form.addEventListener('dragenter', (e: DragEvent) => {
             const target = e.target as HTMLElement;
-            if (!target.matches(selectorDragenter)) return;
+            if (!selectorDragenter.includes(target.id)) return;
 
             if (
                 target instanceof HTMLInputElement &&
@@ -260,7 +261,7 @@ export class FormBindingManager implements BindingManagerInterface {
 
         form.addEventListener('dragleave', (e: DragEvent) => {
             const target = e.target as HTMLElement;
-            if (!target.matches(selectorDragleave)) return;
+            if (!selectorDragleave.includes(target.id)) return;
 
             if (
                 target instanceof HTMLInputElement &&
@@ -272,7 +273,7 @@ export class FormBindingManager implements BindingManagerInterface {
 
         form.addEventListener('drop', async (e: DragEvent) => {
             const target = e.target as HTMLElement;
-            if (!target.matches(selectorDrop)) return;
+            if (!selectorDrop.includes(target.id)) return;
                 e.preventDefault();
             if (
                 target instanceof HTMLInputElement &&
@@ -291,13 +292,13 @@ export class FormBindingManager implements BindingManagerInterface {
                 data.targetChildrenForm,
                 data.message!,
                 'container-div-error-message');
-        });
+        },true);
 
         form.addEventListener('field:validation:success',(event) => {
             const data = (event as CustomEvent).detail as FieldValidationEventData;
             controller.clearErrorDataChildren(data.targetChildrenForm);
            this.updateSubmitButtonState(form,true);
-        });
+        },true);
     }
 
     /**

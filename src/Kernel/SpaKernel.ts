@@ -10,8 +10,9 @@ import type { EventSubscriberInterface } from '@wlindabla/event_dispatcher';
 
 import type {
     SpaKernelExtensionInterface,
-    SpaRouterInterface, 
-    BindingManagerInterface } from '../contracts';
+    SpaRouterInterface,
+    BindingManagerInterface
+} from '../contracts';
 import type {
     SpaRequest,
     SpaRouterOptions,
@@ -150,18 +151,18 @@ export class SpaKernel implements SpaRouterInterface {
     /** The current URL being navigated to */
     private currentUrl: string = window.location.href;
 
-     /** Extensions registered via addKernelExtension() — sorted by priority desc */
+    /** Extensions registered via addKernelExtension() — sorted by priority desc */
     private readonly kernelExtensions: SpaKernelExtensionInterface[] = [];
 
     /** Mutable CRUD event map — extensible by extensions */
     private readonly crudEventMap: Map<string, string> = new Map([
-        ['list',      SpaEvents.CRUD_LIST],
-        ['show',      SpaEvents.CRUD_SHOW],
-        ['create',    SpaEvents.CRUD_CREATE],
-        ['edit',      SpaEvents.CRUD_EDIT],
-        ['delete',    SpaEvents.CRUD_DELETE],
+        ['list', SpaEvents.CRUD_LIST],
+        ['show', SpaEvents.CRUD_SHOW],
+        ['create', SpaEvents.CRUD_CREATE],
+        ['edit', SpaEvents.CRUD_EDIT],
+        ['delete', SpaEvents.CRUD_DELETE],
         ['dashboard', SpaEvents.DASHBOARD],
-        ['batch',     SpaEvents.CRUD_BATCH],
+        ['batch', SpaEvents.CRUD_BATCH],
     ]);
 
     /**
@@ -197,7 +198,7 @@ export class SpaKernel implements SpaRouterInterface {
         // so all services created after have access to env/debug
         SpaParameterBag.initialize(KERNEL_WRITE_TOKEN, {
             env: this.env,
-            debug: debug 
+            debug: debug
         });
 
         // Initialize core services
@@ -367,12 +368,12 @@ export class SpaKernel implements SpaRouterInterface {
                 if (this.mainContentHeader) {
                     this.domManager.reinitialize(this.mainContentHeader, routeMatch);
                 }
-                
+
                 this.domManager.reinitialize(this.mainContentArea, routeMatch);
-                 if (this.env !== 'prod') {
-                     SonataSpaLogger.log('event SpaNavigateCompletedEvent', event);
-                     SonataSpaLogger.log('SpaNavigateCompletedEvent mainContentHeader',this.mainContentHeader?.innerHTML);
-                     SonataSpaLogger.log('SpaNavigateCompletedEvent mainContentArea', this.mainContentArea?.innerHTML);
+                if (this.env !== 'prod') {
+                    SonataSpaLogger.log('event SpaNavigateCompletedEvent', event);
+                    SonataSpaLogger.log('SpaNavigateCompletedEvent mainContentHeader', this.mainContentHeader?.innerHTML);
+                    SonataSpaLogger.log('SpaNavigateCompletedEvent mainContentArea', this.mainContentArea?.innerHTML);
                 }
             }
         );

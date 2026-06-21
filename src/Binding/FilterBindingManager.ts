@@ -106,8 +106,6 @@ export class FilterBindingManager implements BindingManagerInterface {
         this.bindSortingLinks(container);
     }
 
-    // ─── Filter form ──────────────────────────────────────────────────────────
-
     /**
      * Find and bind all Sonata filter forms.
      * The real Sonata filter form always has class "sonata-filter-form".
@@ -202,8 +200,6 @@ export class FilterBindingManager implements BindingManagerInterface {
             });
     }
 
-    // ─── Column sort links ────────────────────────────────────────────────────
-
     /**
      * Intercept column sort links in the Sonata list table header.
      *
@@ -235,8 +231,6 @@ export class FilterBindingManager implements BindingManagerInterface {
                 });
             });
     }
-
-    // ─── URL building ─────────────────────────────────────────────────────────
 
     /**
      * Build the navigation URL from the already-prepared form data.
